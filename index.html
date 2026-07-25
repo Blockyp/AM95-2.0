@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>AM95 Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  :root {
+    --mint: #9fe8d8;
+    --bg: #0e1210;
+    --card: #171c1a;
+    --text: #eef5f2;
+    --muted: #8fa39c;
+    --in-stock: #6ee7a8;
+    --out-stock: #e76e6e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px 60px;
+  }
+  h1 {
+    font-size: 20px;
+    margin: 0 0 4px;
+    letter-spacing: -0.02em;
+  }
+  .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 24px; }
+  h2 {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    margin: 32px 0 12px;
+  }
+  .pair-card {
+    background: var(--card);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 16px;
+    border: 1px solid #232a27;
+  }
+  .pair-title { font-size: 16px; font-weight: 600; margin-bottom: 2px; }
+  .pair-sku { color: var(--muted); font-size: 12px; margin-bottom: 12px; }
+  .retailer-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-top: 1px solid #232a27;
+    font-size: 14px;
+  }
+  .retailer-row:first-of-type { border-top: none; }
+  .retailer-name { font-weight: 500; }
+  .retailer-name a { color: var(--text); text-decoration: none; }
+  .retailer-name a:hover { color: var(--mint); }
+  .price { font-weight: 600; }
+  .stock-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+  .in-stock { color: var(--in-stock); }
+  .in-stock .stock-dot { background: var(--in-stock); }
+  .out-stock { color: var(--out-stock); }
+  .out-stock .stock-dot { background: var(--out-stock); }
+  .unknown { color: var(--muted); }
+  .unknown .stock-dot { background: var(--muted); }
+  .release-item {
+    background: var(--card);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    border: 1px solid #232a27;
+    font-size: 14px;
+  }
+  .release-item a { color: var(--text); text-decoration: none; font-weight: 500; }
+  .release-item a:hover { color: var(--mint); }
+  .release-meta { color: var(--muted); font-size: 12px; margin-top: 4px; }
+  .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+  .updated { color: var(--muted); font-size: 12px; margin-top: 32px; text-align: center; }
+</style>
+</head>
+<body>
+
+<h1>🌿 AM95 Tracker</h1>
+<div class="subtitle">Price, stock &amp; new release monitor</div>
+
+<h2>Watchlist</h2>
+<div id="watchlist"></div>
+
+<h2>New Listings</h2>
+<div id="releases"></div>
+
+<div class="updated" id="lastUpdated"></div>
+
+<script>
+async function loadData() {
+  try {
+    const [pricesRes, releasesRes] = await Promise.all([
+      fetch('data/prices.json').then(r => r.ok ? r.json() : {}),
+      fetch('data/new_releases.json').then(r => r.ok ? r.json() : {feed: []}),
+    ]);
+    renderWatchlist(pricesRes);
+    renderReleases(releasesRes.feed || []);
+  } catch (e) {
+    document.getElementById('watchlist').innerHTML =
+      '<div class="empty">No data yet — the scraper hasn\'t run. Trigger it from the GitHub Actions tab.</div>';
+  }
+}
+
+function stockClass(inStock) {
+  if (inStock === true) return 'in-stock';
+  if (inStock === false) return 'out-stock';
+  return 'unknown';
+}
+function stockLabel(inStock) {
+  if (inStock === true) return 'In stock';
+  if (inStock === false) return 'Out of stock';
+  return 'Unknown';
+}
+
+function renderWatchlist(prices) {
+  const container = document.getElementById('watchlist');
+  const pairs = Object.values(prices);
+  if (!pairs.length) {
+    container.innerHTML = '<div class="empty">No watchlist data yet.</div>';
+    return;
+  }
+  let latest = null;
+  container.innerHTML = pairs.map(pair => {
+    const rows = Object.entries(pair.retailers || {}).map(([retailer, info]) => {
+      if (info.checked_at && (!latest || info.checked_at > latest)) latest = info.checked_at;
+      const cls = stockClass(info.in_stock);
+      return `
+        <div class="retailer-row">
+          <span class="retailer-name"><a href="${info.url}" target="_blank">${retailer}</a></span>
+          <span class="${cls}"><span class="stock-dot"></span>${stockLabel(info.in_stock)}</span>
+          <span class="price">${info.price || '—'}</span>
+        </div>`;
+    }).join('');
+    return `
+      <div class="pair-card">
+        <div class="pair-title">${pair.name}</div>
+        <div class="pair-sku">${pair.sku}</div>
+        ${rows}
+      </div>`;
+  }).join('');
+
+  if (latest) {
+    document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date(latest).toLocaleString();
+  }
+}
+
+function renderReleases(feed) {
+  const container = document.getElementById('releases');
+  if (!feed.length) {
+    container.innerHTML = '<div class="empty">No new listings detected yet.</div>';
+    return;
+  }
+  container.innerHTML = feed.slice(0, 30).map(item => `
+    <div class="release-item">
+      <a href="${item.url}" target="_blank">${item.name}</a>
+      <div class="release-meta">${item.retailer} · ${new Date(item.first_seen).toLocaleString()}</div>
+    </div>
+  `).join('');
+}
+
+loadData();
+</script>
+
+</body>
+</html>

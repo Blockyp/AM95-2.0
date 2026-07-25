@@ -1,0 +1,30 @@
+{
+  "pairs": [
+    {
+      "name": "Air Max 95 'Fresh Mint'",
+      "sku": "HJ5996-005",
+      "urls": {
+        "JD Sports": "https://www.jdsports.co.uk/product/black-nike-air-max-95-fresh-mint/19751629/",
+        "size?": "https://www.size.co.uk/product/grey-nike-air-max-95-fresh-mint/19753671/",
+        "END": "https://www.endclothing.com/gb/nike-air-max-95-og-sneaker-hj5996-005.html",
+        "Footpatrol": "https://www.footpatrol.com/products/790441",
+        "Seven Store": "https://www.sevenstore.com/footwear-categories/sneakers/nike-fresh-mint-air-max-95-og-big-bubble-sneaker/?sku=41350961900",
+        "Nike": "https://www.nike.com/gb/t/air-max-95-big-bubble-womens-shoes-SDzrF8Ou/HJ5996-005",
+        "Offspring": "https://www.offspring.co.uk/view/product/offspring_catalog/5,22/2026458729",
+        "asphaltgold": "https://www.sneakerjagers.com/en/go/8702513?ch=22",
+        "Solebox": "https://www.sneakerjagers.com/en/go/8696256?ch=22",
+        "Footshop": "https://www.sneakerjagers.com/en/go/8698431?ch=22",
+        "BSTN": "https://www.sneakerjagers.com/en/go/8699675?ch=22",
+        "43einhalb": "https://www.sneakerjagers.com/en/go/8695880?ch=22"
+      }
+    }
+  ],
+  "new_release_scan_pages": {
+    "JD Sports": "https://www.jdsports.co.uk/men/mens-footwear/nike/nike-air-max/nike-air-max-95/",
+    "size?": "https://www.size.co.uk/collection/nike-air-max-95/",
+    "END": "https://www.endclothing.com/gb/nike-air-max-95",
+    "Footpatrol": "https://www.footpatrol.com/collections/footwear-collection-nike-air-max-95",
+    "Seven Store": "https://www.sevenstore.com/footwear-categories/sneakers/?filter.brand=Nike",
+    "Nike": "https://www.nike.com/gb/w/air-max-95-shoes-hy2i5znik1zy7ok"
+  }
+}
