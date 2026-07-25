@@ -1,1 +1,50 @@
-{"known_urls": {}, "feed": []}
+{
+  "known_urls": {
+    "Footpatrol": {},
+    "Seven Store": {},
+    "Nike": {
+      "https://www.nike.com/gb/t/run-defy-mens-road-running-shoes-015L9V/HM9594-100": {
+        "name": "Nike Run Defy",
+        "first_seen": "2026-07-25T12:19:23.123827+00:00"
+      },
+      "https://www.nike.com/gb/t/air-max-95-big-bubble-mens-shoes-0sr5hADd/IR1474-010": {
+        "name": "Nike Air Max 95 Big Bubble",
+        "first_seen": "2026-07-25T12:19:23.123827+00:00"
+      },
+      "https://www.nike.com/gb/t/shox-tl-mens-shoes-DVH2Jiy4/AV3595-002": {
+        "name": "Nike Shox TL",
+        "first_seen": "2026-07-25T12:19:23.123827+00:00"
+      },
+      "https://www.nike.com/gb/t/mercurial-superfly-rgn-se-firm-ground-low-top-football-boots-8uWkrUEF/IQ2995-900": {
+        "name": "Nike Mercurial Superfly RGN SE",
+        "first_seen": "2026-07-25T12:19:23.123827+00:00"
+      }
+    }
+  },
+  "feed": [
+    {
+      "retailer": "Nike",
+      "name": "Nike Run Defy",
+      "url": "https://www.nike.com/gb/t/run-defy-mens-road-running-shoes-015L9V/HM9594-100",
+      "first_seen": "2026-07-25T12:19:23.123827+00:00"
+    },
+    {
+      "retailer": "Nike",
+      "name": "Nike Air Max 95 Big Bubble",
+      "url": "https://www.nike.com/gb/t/air-max-95-big-bubble-mens-shoes-0sr5hADd/IR1474-010",
+      "first_seen": "2026-07-25T12:19:23.123827+00:00"
+    },
+    {
+      "retailer": "Nike",
+      "name": "Nike Shox TL",
+      "url": "https://www.nike.com/gb/t/shox-tl-mens-shoes-DVH2Jiy4/AV3595-002",
+      "first_seen": "2026-07-25T12:19:23.123827+00:00"
+    },
+    {
+      "retailer": "Nike",
+      "name": "Nike Mercurial Superfly RGN SE",
+      "url": "https://www.nike.com/gb/t/mercurial-superfly-rgn-se-firm-ground-low-top-football-boots-8uWkrUEF/IQ2995-900",
+      "first_seen": "2026-07-25T12:19:23.123827+00:00"
+    }
+  ]
+}
