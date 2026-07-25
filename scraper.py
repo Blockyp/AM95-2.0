@@ -66,15 +66,40 @@ def _meta(soup, name):
     return tag.get("content", "").strip() if tag else None
 
 
-def parse_product_page(html):
-    """Read structured product data first (meta tags used for social/SEO
-    previews — og:price, product:price, twitter:data1/data2, JSON-LD),
-    since these are far more reliable than scanning visible page text.
-    Falls back to text scanning only if no structured data is found."""
-    soup = BeautifulSoup(html, "html.parser")
-
+def parse_product_page(html, url=None):
+    """Read structured product data. Tries, in order of reliability:
+    1. Shopify's public product JSON endpoint (most retailers here run on
+       Shopify — appending .json to a /products/ URL returns exact price
+       and stock data with no guessing involved)
+    2. Open Graph / meta tags
+    3. Twitter card data
+    4. JSON-LD structured data
+    5. Loose text scan (last resort)"""
     price = None
     in_stock = None
+
+    # --- 0. Shopify product JSON endpoint ---
+    if url and "/products/" in url:
+        base = url.split("?")[0].rstrip("/")
+        json_url = base + ".json"
+        shopify_html = fetch(json_url)
+        if shopify_html:
+            try:
+                data = json.loads(shopify_html)
+                product = data.get("product", {})
+                variants = product.get("variants", [])
+                if variants:
+                    prices = [float(v["price"]) for v in variants if v.get("price")]
+                    if prices:
+                        price = f"£{min(prices):.2f}"
+                    in_stock = any(v.get("available") for v in variants)
+            except (json.JSONDecodeError, ValueError, TypeError, KeyError):
+                pass
+
+    if price is not None and in_stock is not None:
+        return {"price": price, "in_stock": in_stock}
+
+    soup = BeautifulSoup(html, "html.parser")
 
     # --- 1. Open Graph / Shopify-style product meta tags ---
     amount = _meta(soup, "og:price:amount") or _meta(soup, "product:price:amount")
@@ -197,7 +222,7 @@ def check_watchlist(watchlist):
                 }
                 continue
 
-            result = parse_product_page(html)
+            result = parse_product_page(html, url=url)
             prev = prices[pair_key]["retailers"].get(retailer, {})
 
             entry = {
@@ -248,7 +273,9 @@ def check_new_releases(watchlist):
         known = seen["known_urls"].setdefault(retailer, {})
 
         for url, name in products.items():
-            if "95" not in name and "95" not in url:
+            name_l = name.lower()
+            url_l = url.lower()
+            if "air max 95" not in name_l and "air-max-95" not in url_l and "airmax95" not in url_l:
                 continue
             if url not in known:
                 known[url] = {"name": name, "first_seen": now}
