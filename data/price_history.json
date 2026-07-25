@@ -1,0 +1,22 @@
+{
+  "HJ5996-005": [
+    {
+      "retailer": "Footpatrol",
+      "price": "\u00a320",
+      "in_stock": false,
+      "at": "2026-07-25T11:38:15.591666+00:00"
+    },
+    {
+      "retailer": "Seven Store",
+      "price": "\u00a31",
+      "in_stock": true,
+      "at": "2026-07-25T11:38:15.591666+00:00"
+    },
+    {
+      "retailer": "Nike",
+      "price": "\u00a3174.99",
+      "in_stock": true,
+      "at": "2026-07-25T11:38:15.591666+00:00"
+    }
+  ]
+}

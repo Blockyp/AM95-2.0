@@ -1,0 +1,83 @@
+{
+  "HJ5996-005": {
+    "name": "Air Max 95 'Fresh Mint'",
+    "sku": "HJ5996-005",
+    "retailers": {
+      "JD Sports": {
+        "url": "https://www.jdsports.co.uk/product/black-nike-air-max-95-fresh-mint/19751629/",
+        "price": null,
+        "in_stock": null,
+        "error": "fetch_failed",
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "size?": {
+        "url": "https://www.size.co.uk/product/grey-nike-air-max-95-fresh-mint/19753671/",
+        "price": null,
+        "in_stock": null,
+        "error": "fetch_failed",
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "END": {
+        "url": "https://www.endclothing.com/gb/nike-air-max-95-og-sneaker-hj5996-005.html",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Footpatrol": {
+        "url": "https://www.footpatrol.com/products/790441",
+        "price": "\u00a320",
+        "in_stock": false,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Seven Store": {
+        "url": "https://www.sevenstore.com/footwear-categories/sneakers/nike-fresh-mint-air-max-95-og-big-bubble-sneaker/?sku=41350961900",
+        "price": "\u00a31",
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Nike": {
+        "url": "https://www.nike.com/gb/t/air-max-95-big-bubble-womens-shoes-SDzrF8Ou/HJ5996-005",
+        "price": "\u00a3174.99",
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Offspring": {
+        "url": "https://www.offspring.co.uk/view/product/offspring_catalog/5,22/2026458729",
+        "price": null,
+        "in_stock": null,
+        "error": "fetch_failed",
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "asphaltgold": {
+        "url": "https://www.sneakerjagers.com/en/go/8702513?ch=22",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Solebox": {
+        "url": "https://www.sneakerjagers.com/en/go/8696256?ch=22",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "Footshop": {
+        "url": "https://www.sneakerjagers.com/en/go/8698431?ch=22",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "BSTN": {
+        "url": "https://www.sneakerjagers.com/en/go/8699675?ch=22",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      },
+      "43einhalb": {
+        "url": "https://www.sneakerjagers.com/en/go/8695880?ch=22",
+        "price": null,
+        "in_stock": true,
+        "checked_at": "2026-07-25T11:38:15.591666+00:00"
+      }
+    }
+  }
+}
